@@ -1,0 +1,23 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>kim.nzxy.kit.soon</id>
+    <name>Soon</name>
+    <vendor email="lyun.chn@gmail.com" url="https://nzxy.kim">ly-chn</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <resource-bundle>messages.MyBundle</resource-bundle>
+
+    <description><![CDATA[
+        A todolist tool integrated into the IDE
+        ]]></description>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow factoryClass="kim.nzxy.soon.toolWindow.SoonWindowFactory"
+                    id="SoonTodoToolWindow"
+                    anchor="right"
+                    name="Soon"
+                    icon="/icons/soon.svg"
+                    stripeTitle="Soon"/>
+    </extensions>
+</idea-plugin>
