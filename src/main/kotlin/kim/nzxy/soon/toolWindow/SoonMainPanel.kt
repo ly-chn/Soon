@@ -149,15 +149,10 @@ class MainTable : JBTable() {
     }
 
     private fun customizeColumn() {
-        val groupColumn = columnModel.getColumn(0)
-        val titleColumn = columnModel.getColumn(1)
-        val priorityColumn = columnModel.getColumn(2)
-        val statusColumn = columnModel.getColumn(3)
+        val titleColumn = columnModel.getColumn(0)
+        val priorityColumn = columnModel.getColumn(1)
+        val statusColumn = columnModel.getColumn(2)
 
-        groupColumn.preferredWidth = 120
-        groupColumn.width = 120
-
-        groupColumn.cellRenderer = tableModel.getRenderer()
         titleColumn.cellRenderer = tableModel.getRenderer()
         priorityColumn.cellRenderer = tableModel.getRenderer()
         statusColumn.cellRenderer = tableModel.getRenderer()
@@ -166,13 +161,13 @@ class MainTable : JBTable() {
         statusColumn.cellEditor = object : ComboBoxCellEditor() {
             override fun getComboBoxItems(): List<String> = statusValues
         }
-        fixedWidth(statusColumn, 60)
+        fixedWidth(statusColumn, 48)
 
         val priorityValues = SoonPriority.entries.map { it.fullTitle }
         priorityColumn.cellEditor = object : ComboBoxCellEditor() {
             override fun getComboBoxItems(): List<String> = priorityValues
         }
-        fixedWidth(priorityColumn, 60)
+        fixedWidth(priorityColumn, 48)
     }
 
     @Suppress("SameParameterValue")

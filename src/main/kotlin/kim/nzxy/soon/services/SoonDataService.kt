@@ -20,7 +20,6 @@ class SoonDataService() {
             result.add(
                 SoonInfo(
                     i.toLong(),
-                    "分组$random",
                     SoonUtil.random(*SoonStatus.entries.toTypedArray()),
                     SoonUtil.random(*SoonPriority.entries.toTypedArray()),
                     "title$random",

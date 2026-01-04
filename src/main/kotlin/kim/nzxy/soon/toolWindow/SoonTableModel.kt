@@ -25,7 +25,7 @@ class SoonTableModel(private var data: SmartList<SoonInfo>) : AbstractTableModel
         showingData.addAll(data)
     }
 
-    private val columnNames = arrayOf("分组", "标题", "优先级", "状态")
+    private val columnNames = arrayOf("标题", "缓急", "状态")
 
     fun getRenderer(): TableCellRenderer = render
 
@@ -40,10 +40,9 @@ class SoonTableModel(private var data: SmartList<SoonInfo>) : AbstractTableModel
 
     fun getValueAt(rowData: SoonInfo, columnIndex: Int): String? {
         return when (columnIndex) {
-            0 -> rowData.group
-            1 -> rowData.title
-            2 -> rowData.priority.shortTitle
-            3 -> rowData.status.shortTitle
+            0 -> rowData.title
+            1 -> rowData.priority.shortTitle
+            2 -> rowData.status.shortTitle
             else -> null
         }
     }
@@ -134,8 +133,6 @@ class SoonTableCellMutLineRenderer : TableCellRenderer, JBTextArea() {
         if (!isSelected && highlighted.contains(HighlightLoc(row, column))) {
             this.background = JBColor.YELLOW
         }
-        alignmentX = CENTER_ALIGNMENT
-        alignmentY = CENTER_ALIGNMENT
         return this
     }
 

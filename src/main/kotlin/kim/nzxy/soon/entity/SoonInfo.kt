@@ -5,7 +5,6 @@ package kim.nzxy.soon.entity
  */
 data class SoonInfo(
     val id: Long,
-    val group: String = "未分组",
     val status: SoonStatus,
     val priority: SoonPriority,
     val title: String,
