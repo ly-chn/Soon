@@ -17,7 +17,6 @@ import kim.nzxy.soon.entity.SoonStatus
 import kim.nzxy.soon.services.SoonDataService
 import kim.nzxy.soon.util.ColorUtil
 import java.awt.BorderLayout
-import java.awt.CardLayout
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 import javax.swing.AbstractAction
@@ -54,14 +53,14 @@ class SoonMainPanel() : JBPanel<SoonMainPanel>() {
 
 class ToolbarPanel(comp: JComponent) : JBPanel<ToolbarPanel>() {
     init {
-        val cardLayout = CardLayout()
+        val borderLayout = BorderLayout()
         val filterSearch = FilterSearchTextField()
         filterSearch.addDocumentListener(object : DocumentAdapter() {
             override fun textChanged(e: DocumentEvent) {
                 EventBus.filterTextChange.fire(filterSearch.text)
             }
         })
-        layout = cardLayout
+        layout = borderLayout
         val actionGroup = DefaultActionGroup()
         val refreshAction = object : RefreshAction("Refresh", "Refresh the table", AllIcons.Actions.Refresh) {
             override fun actionPerformed(e: AnActionEvent) {
@@ -74,7 +73,6 @@ class ToolbarPanel(comp: JComponent) : JBPanel<ToolbarPanel>() {
         }
         val searchAction = object : FindAction() {
             override fun actionPerformed(e: AnActionEvent) {
-                cardLayout.show(this@ToolbarPanel, "search")
                 filterSearch.requestFocus()
             }
         }
@@ -83,20 +81,18 @@ class ToolbarPanel(comp: JComponent) : JBPanel<ToolbarPanel>() {
         searchAction.registerShortcutOn(comp)
 
         actionGroup.add(refreshAction)
-        actionGroup.add(searchAction)
         val toolbar = ActionManager.getInstance().createActionToolbar(
             "SoonToolBar", actionGroup, true
         )
 
         toolbar.targetComponent = comp
-        add(toolbar.component, "toolbar")
         EventBus.escKeyClick.add(object : SimpleEventListener {
             override fun fire() {
-                cardLayout.show(this@ToolbarPanel, "toolbar")
                 filterSearch.text = ""
             }
         })
-        add(filterSearch, "search")
+        add(filterSearch, BorderLayout.CENTER)
+        add(toolbar.component, BorderLayout.EAST)
     }
 }
 
