@@ -12,6 +12,7 @@ import com.intellij.ui.filterField.FilterSearchTextField
 import com.intellij.ui.table.JBTable
 import com.intellij.util.SmartList
 import com.intellij.util.ui.ComboBoxCellEditor
+import kim.nzxy.soon.entity.SoonPriority
 import kim.nzxy.soon.entity.SoonStatus
 import kim.nzxy.soon.services.SoonDataService
 import kim.nzxy.soon.util.ColorUtil
@@ -110,7 +111,7 @@ abstract class FindAction() : AnAction("Search", "Search", AllIcons.Actions.Sear
     }
 }
 
-class MainTable() : JBTable() {
+class MainTable : JBTable() {
     val tableModel = SoonTableModel(SmartList())
 
     init {
@@ -153,6 +154,7 @@ class MainTable() : JBTable() {
         val priorityColumn = columnModel.getColumn(2)
         val statusColumn = columnModel.getColumn(3)
 
+        groupColumn.preferredWidth = 120
         groupColumn.width = 120
 
         groupColumn.cellRenderer = tableModel.getRenderer()
@@ -160,20 +162,20 @@ class MainTable() : JBTable() {
         priorityColumn.cellRenderer = tableModel.getRenderer()
         statusColumn.cellRenderer = tableModel.getRenderer()
 
-
-        val statusValues = SoonStatus.entries.map { it.shortTitle }
+        val statusValues = SoonStatus.entries.map { it.fullTitle }
         statusColumn.cellEditor = object : ComboBoxCellEditor() {
             override fun getComboBoxItems(): List<String> = statusValues
         }
-        fixedWidth(statusColumn, 80)
+        fixedWidth(statusColumn, 60)
 
-        val priorityValues = SoonStatus.entries.map { it.shortTitle }
+        val priorityValues = SoonPriority.entries.map { it.fullTitle }
         priorityColumn.cellEditor = object : ComboBoxCellEditor() {
             override fun getComboBoxItems(): List<String> = priorityValues
         }
-        fixedWidth(priorityColumn, 80)
+        fixedWidth(priorityColumn, 60)
     }
 
+    @Suppress("SameParameterValue")
     private fun fixedWidth(column: TableColumn, width: Int) {
         column.width = width
         column.minWidth = width

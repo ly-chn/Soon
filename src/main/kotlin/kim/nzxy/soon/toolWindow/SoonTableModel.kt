@@ -1,13 +1,17 @@
 package kim.nzxy.soon.toolWindow
 
+import com.intellij.ui.EditorTextField
 import com.intellij.ui.JBColor
 import com.intellij.ui.TableCellState
 import com.intellij.ui.components.JBTextArea
 import com.intellij.util.SmartList
+import com.intellij.util.ui.AbstractTableCellEditor
 import kim.nzxy.soon.entity.HighlightLoc
 import kim.nzxy.soon.entity.SoonInfo
 import kim.nzxy.soon.util.PinyinMatch
 import java.awt.Component
+import java.awt.event.MouseEvent
+import java.util.*
 import javax.swing.JTable
 import javax.swing.table.AbstractTableModel
 import javax.swing.table.TableCellRenderer
@@ -100,7 +104,7 @@ class SoonTableModel(private var data: SmartList<SoonInfo>) : AbstractTableModel
     }
 }
 
-class SoonTableCellMutLineRenderer() : TableCellRenderer, JBTextArea() {
+class SoonTableCellMutLineRenderer : TableCellRenderer, JBTextArea() {
     private var highlighted: Set<HighlightLoc> = emptySet()
     private val cellState = TableCellState()
 

@@ -23,7 +23,7 @@ class SoonDataService() {
                     "分组$random",
                     SoonUtil.random(*SoonStatus.entries.toTypedArray()),
                     SoonUtil.random(*SoonPriority.entries.toTypedArray()),
-                    "title\nl1\nl2\n$random",
+                    "title$random",
                 )
             )
         }
